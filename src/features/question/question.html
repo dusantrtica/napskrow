@@ -1,0 +1,25 @@
+<div>
+  {{ question.question }}
+
+  <button ng-click="question.upVoteQuestion()">Vote Up</button>
+  <button ng-click="question.downVoteQuestion()">Vote Down</button>
+
+  <div>
+    <textarea ng-model="question.newAnswerText">
+          {{ question.newAnswerText }}
+      </textarea
+    >
+    <button
+      ng-disabled="!question.newAnswerText"
+      ng-click="home.saveAnswer(question.Id)"
+    >
+      Save
+    </button>
+  </div>
+
+  <ul ng-show="question.answers">
+    <li ng-repeat="answer in question.answers">
+      {{ answer }}
+    </li>
+  </ul>
+</div>
