@@ -1,0 +1,17 @@
+<div class="jumbotron">
+  <h1>Hello, {{ home.name }}</h1>
+</div>
+
+<button class="btn btn-primary" ng-click="home.changeName()">Change</button>
+
+<div ng-repeat="question in home.questions">
+  {{ question }}
+  <button ng-click="home.upVoteQuestion(question.Id)">Vote Up</button>
+  <button ng-click="home.downVoteQuestion(question.Id)">Vote Down</button>
+
+  <ul ng-show="home.answers[question.Id]">
+    <li ng-repeat="answer in home.answers[question.Id]">
+      {{ answer }}
+    </li>
+  </ul>
+</div>
