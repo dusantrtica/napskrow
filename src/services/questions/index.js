@@ -1,16 +1,20 @@
 import angular from "angular";
 import * as R from "ramda";
+import { sortAnswers } from "../../utils";
 
 const indexAndSort = R.compose(
-  R.map(R.sortBy(R.prop("created_at"))),
+  R.map(sortAnswers),
   R.groupBy(R.prop("Question-Id"))
 );
 
 class QuestionService {
+  /* Questions have no timestamp in, so I assumed ID are in increasing order meaning that
+    the most recent question will have the greatest Id */
   getQuestions() {
     return fetch(" https://api.myjson.com/bins/dck5b")
       .then(R.invoker(0, "json"))
-      .then(R.prop("feed_questions"));
+      .then(R.prop("feed_questions"))
+      .then(R.sortWith([R.descend(R.prop("Id"))]));
   }
 
   /* answers are indexed per question id */

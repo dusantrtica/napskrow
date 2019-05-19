@@ -9,6 +9,19 @@
   <button ng-click="home.upVoteQuestion(question.Id)">Vote Up</button>
   <button ng-click="home.downVoteQuestion(question.Id)">Vote Down</button>
 
+  <div>
+    <textarea ng-model="question.newAnswerText">
+          {{ question.newAnswerText }}
+      </textarea
+    >
+    <button
+      ng-disabled="!question.newAnswerText"
+      ng-click="home.saveAnswer(question.Id)"
+    >
+      Save
+    </button>
+  </div>
+
   <ul ng-show="home.answers[question.Id]">
     <li ng-repeat="answer in home.answers[question.Id]">
       {{ answer }}
