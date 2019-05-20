@@ -1,28 +1,28 @@
-import * as R from "ramda";
-import moment from "moment";
+import R from 'ramda';
 import {
   upVoteQuestion,
   downVoteQuestion,
   saveAnswer,
-  lensById
-} from "../../utils";
+  lensById,
+} from '../../utils';
 
 export default class HomeController {
-  constructor(questionService) {
-    this.name = "World";
+  constructor(questionService, $scope) {
     this.questionService = questionService;
+    this.$scope = $scope;
   }
 
-  changeName() {
-    this.name = "angular-tips";
-    this.questionService.getAnswers().then(answers => {
-      this.answers = answers;
-    });
-    this.questionService.getQuestions().then(questions => {
-      this.questions = questions;
+  $onInit() {
+    Promise.all([
+      this.questionService.getAnswers(),
+      this.questionService.getQuestions(),
+    ]).then(([questions, answers]) => {
+      this.$scope.$apply(() => {
+        this.questions = questions;
+        this.answers = answers;
+      });
     });
   }
-
   upVoteQuestion(questionId) {
     this.questions = upVoteQuestion(questionId, this.questions);
   }
@@ -33,8 +33,8 @@ export default class HomeController {
 
   saveAnswer(questionId) {
     const { newAnswerText } = R.find(
-      R.propEq("Id", questionId),
-      this.questions
+      R.propEq('Id', questionId),
+      this.questions,
     );
 
     this.answers = saveAnswer(questionId, newAnswerText, this.answers);
@@ -42,10 +42,10 @@ export default class HomeController {
     // Reset newAnswerText, reset draft.
     this.questions = R.over(
       lensById(questionId, this.questions),
-      R.omit(["newAnswerText"]),
-      this.questions
+      R.omit(['newAnswerText']),
+      this.questions,
     );
   }
 }
 
-HomeController.$inject = ["questionService"];
+HomeController.$inject = ['questionService', '$scope'];
