@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 import {
   upVoteQuestion,
   downVoteQuestion,
@@ -14,8 +14,8 @@ export default class HomeController {
 
   $onInit() {
     Promise.all([
-      this.questionService.getAnswers(),
       this.questionService.getQuestions(),
+      this.questionService.getAnswers(),
     ]).then(([questions, answers]) => {
       this.$scope.$apply(() => {
         this.questions = questions;

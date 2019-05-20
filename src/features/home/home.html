@@ -5,7 +5,7 @@
 
   <div ng-repeat="question in home.questions">
     {{ question }}
-    <a ui-sref="question({questionId: question.Id})">Details</a>
+    <a ui-sref="questionDetails({questionId: question.Id})">Details</a>
     <button ng-click="home.upVoteQuestion(question.Id)">Vote Up</button>
     <button ng-click="home.downVoteQuestion(question.Id)">Vote Down</button>
 

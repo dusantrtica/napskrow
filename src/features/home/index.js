@@ -2,7 +2,7 @@ import angular from 'angular';
 import uirouter from 'angular-ui-router';
 
 import routing from './home.routes';
-import HomeController from './HomeController';
+import HomeController from './home.controller';
 import questionService from '../../services/questions';
 
 export default angular
