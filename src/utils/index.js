@@ -38,7 +38,7 @@ export const downVoteQuestion = (questionId, questions) => {
       lens,
       downVoteLens,
     ),
-    R.add(-1),
+    R.add(1),
     questions,
   );
 };

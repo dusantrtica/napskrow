@@ -5,13 +5,13 @@
   <button ng-click="question.downVoteQuestion()">Vote Down</button>
 
   <div>
-    <textarea ng-model="question.newAnswerText">
-          {{ question.newAnswerText }}
+    <textarea ng-model="question.question.newAnswerText">
+          {{ question.question.newAnswerText }}
       </textarea
     >
     <button
-      ng-disabled="!question.newAnswerText"
-      ng-click="home.saveAnswer(question.Id)"
+      ng-disabled="!question.question.newAnswerText"
+      ng-click="question.saveAnswer(question.Id)"
     >
       Save
     </button>
