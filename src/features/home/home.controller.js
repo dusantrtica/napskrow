@@ -32,20 +32,8 @@ export default class HomeController {
     this.questions = downVoteQuestion(questionId, this.questions);
   }
 
-  saveAnswer(questionId) {
-    const { newAnswerText } = R.find(
-      R.propEq('Id', questionId),
-      this.questions,
-    );
-
-    this.answers = saveAnswer(questionId, newAnswerText, this.answers);
-
-    // Reset newAnswerText, reset draft.
-    this.questions = R.over(
-      lensById(questionId, this.questions),
-      R.omit(['newAnswerText']),
-      this.questions,
-    );
+  saveAnswer(questionId, newAnswer) {
+    this.answers = saveAnswer(questionId, newAnswer, this.answers);
   }
 }
 

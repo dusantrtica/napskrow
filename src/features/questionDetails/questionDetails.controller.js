@@ -32,20 +32,8 @@ export default class QuestionDetailsController {
     this.question = R.over(downVoteLens, R.add(1), this.question);
   }
 
-  saveAnswer() {
-    const { newAnswerText, Id: questionId } = this.question;
-
-    const newAnswer = {
-      Answer: newAnswerText,
-      created_at: moment().format('dd/MMM/YY HH:mm'),
-      'Question-Id': questionId,
-      upvotes: 0,
-      downvotes: 0,
-    };
-
+  saveAnswer(newAnswer) {
     this.answers = R.insert(0, newAnswer, this.answers);
-
-    this.question = R.omit(['newAnswerText'], this.question);
   }
 }
 

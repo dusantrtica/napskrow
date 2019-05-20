@@ -43,16 +43,8 @@ export const downVoteQuestion = (questionId, questions) => {
   );
 };
 
-export const saveAnswer = (questionId, answerText, answers) => {
+export const saveAnswer = (questionId, newAnswer, answers) => {
   const lensByKey = R.lens(R.propOr([], questionId), R.assoc(questionId));
-
-  const newAnswer = {
-    Answer: answerText,
-    created_at: moment().format('dd/MMM/YY HH:mm'),
-    'Question-Id': questionId,
-    upvotes: 0,
-    downvotes: 0,
-  };
 
   /** Since we dont store answer on server, inserting it as a very first element should maintain
    * the order - most recent answer on the top., and we return new collection

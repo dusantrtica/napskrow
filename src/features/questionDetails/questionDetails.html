@@ -3,24 +3,17 @@
     ng-bind-html="questionDetails.$sce.trustAsHtml(questionDetails.question.Text)"
   ></div>
 
-  <div>Upvotes {{ questionDetails.question.upvotes || 0 }}</div>
-  <div>Downvotes {{ questionDetails.question.downvotes || 0 }}</div>
+  <votes
+    upvotes="questionDetails.question.upvotes"
+    downvotes="questionDetails.question.downvotes"
+    on-up-vote="questionDetails.upVoteQuestion()"
+    on-down-vote="questionDetails.downVoteQuestion()"
+  ></votes>
 
-  <button ng-click="questionDetails.upVoteQuestion()">Vote Up</button>
-  <button ng-click="questionDetails.downVoteQuestion()">Vote Down</button>
-
-  <div>
-    <textarea ng-model="questionDetails.question.newAnswerText">
-          {{ questionDetails.question.newAnswerText }}
-      </textarea
-    >
-    <button
-      ng-disabled="!questionDetails.question.newAnswerText"
-      ng-click="questionDetails.saveAnswer(question.Id)"
-    >
-      Save
-    </button>
-  </div>
+  <new-answer
+    on-save-new-answer="questionDetails.saveAnswer(newAnswer)"
+    question-id="questionDetails.question.Id"
+  ></new-answer>
 
   <ul ng-show="questionDetails.answers">
     <li ng-repeat="answer in questionDetails.answers">
