@@ -47,7 +47,7 @@ export const saveAnswer = (questionId, answerText, answers) => {
   const lensByKey = R.lens(R.propOr([], questionId), R.assoc(questionId));
 
   const newAnswer = {
-    Text: answerText,
+    Answer: answerText,
     created_at: moment().format('dd/MMM/YY HH:mm'),
     'Question-Id': questionId,
     upvotes: 0,

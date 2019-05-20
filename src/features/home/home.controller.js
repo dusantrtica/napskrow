@@ -7,9 +7,10 @@ import {
 } from '../../utils';
 
 export default class HomeController {
-  constructor(questionService, $scope) {
+  constructor(questionService, $scope, $sce) {
     this.questionService = questionService;
     this.$scope = $scope;
+    this.$sce = $sce;
   }
 
   $onInit() {
@@ -48,4 +49,4 @@ export default class HomeController {
   }
 }
 
-HomeController.$inject = ['questionService', '$scope'];
+HomeController.$inject = ['questionService', '$scope', '$sce'];

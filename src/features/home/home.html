@@ -1,10 +1,10 @@
 <div ng-controller="HomeController" class="jumbotron">
-  <h1>Hello, {{ home.name }}</h1>
-
-  <button class="btn btn-primary" ng-click="home.changeName()">Change</button>
-
   <div ng-repeat="question in home.questions">
-    {{ question }}
+    <div ng-bind-html="home.$sce.trustAsHtml(question.Text)">
+      {{ question.Text }}
+    </div>
+    <div>Upvotes {{ question.upvotes || 0 }}</div>
+    <div>Downvotes {{ question.downvotes || 0 }}</div>
     <a ui-sref="questionDetails({questionId: question.Id})">Details</a>
     <button ng-click="home.upVoteQuestion(question.Id)">Vote Up</button>
     <button ng-click="home.downVoteQuestion(question.Id)">Vote Down</button>
@@ -24,7 +24,7 @@
 
     <ul ng-show="home.answers[question.Id]">
       <li ng-repeat="answer in home.answers[question.Id]">
-        {{ answer }}
+        <div ng-bind-html="home.$sce.trustAsHtml(answer.Answer)"></div>
       </li>
     </ul>
   </div>

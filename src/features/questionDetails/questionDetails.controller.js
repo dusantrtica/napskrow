@@ -1,10 +1,11 @@
 import * as R from 'ramda';
 import moment from 'moment';
 
-export default class QuestionController {
-  constructor(questionService, $stateParams, $scope) {
+export default class QuestionDetailsController {
+  constructor(questionService, $stateParams, $scope, $sce) {
     this.questionService = questionService;
     this.$scope = $scope;
+    this.$sce = $sce;
     const { questionId } = $stateParams;
     this.questionId = questionId;
   }
@@ -35,7 +36,7 @@ export default class QuestionController {
     const { newAnswerText, Id: questionId } = this.question;
 
     const newAnswer = {
-      Text: newAnswerText,
+      Answer: newAnswerText,
       created_at: moment().format('dd/MMM/YY HH:mm'),
       'Question-Id': questionId,
       upvotes: 0,
@@ -48,4 +49,9 @@ export default class QuestionController {
   }
 }
 
-QuestionController.$inject = ['questionService', '$stateParams', '$scope'];
+QuestionDetailsController.$inject = [
+  'questionService',
+  '$stateParams',
+  '$scope',
+  '$sce',
+];

@@ -1,0 +1,30 @@
+<div ng-controller="QuestionDetailsController">
+  <div
+    ng-bind-html="questionDetails.$sce.trustAsHtml(questionDetails.question.Text)"
+  ></div>
+
+  <div>Upvotes {{ questionDetails.question.upvotes || 0 }}</div>
+  <div>Downvotes {{ questionDetails.question.downvotes || 0 }}</div>
+
+  <button ng-click="questionDetails.upVoteQuestion()">Vote Up</button>
+  <button ng-click="questionDetails.downVoteQuestion()">Vote Down</button>
+
+  <div>
+    <textarea ng-model="questionDetails.question.newAnswerText">
+          {{ questionDetails.question.newAnswerText }}
+      </textarea
+    >
+    <button
+      ng-disabled="!questionDetails.question.newAnswerText"
+      ng-click="questionDetails.saveAnswer(question.Id)"
+    >
+      Save
+    </button>
+  </div>
+
+  <ul ng-show="questionDetails.answers">
+    <li ng-repeat="answer in questionDetails.answers">
+      <div ng-bind-html="questionDetails.$sce.trustAsHtml(answer.Answer)"></div>
+    </li>
+  </ul>
+</div>

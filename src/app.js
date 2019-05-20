@@ -3,7 +3,7 @@ import uirouter from 'angular-ui-router';
 import routing from './app.config';
 
 import home from './features/home';
-import question from './features/question';
+import question from './features/questionDetails';
 
 export default angular.module('app', [uirouter, home, question]).config(routing)
   .name;
