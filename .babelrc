@@ -1,14 +1,11 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
-        "targets": {
-          "browsers": ["last 2 versions"]
-        },
-        "debug": false
+        "useBuiltIns": false
       }
     ]
   ],
-  "plugins": ["transform-runtime", "transform-es2015-modules-commonjs"]
+  "plugins": ["@babel/plugin-transform-runtime"]
 }
