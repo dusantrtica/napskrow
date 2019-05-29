@@ -15,36 +15,35 @@ export const sortAnswers = R.compose(
   ),
 );
 
-export const lensById = R.curry((id, entities) =>
-  R.lensIndex(R.findIndex(R.propEq('Id', id), entities)),
-);
+export const lensById = R.curry((id, entities) => {
+  const index = R.findIndex(R.propEq('Id', id), entities);
+  if (index >= 0) {
+    return R.lensIndex(index, entities);
+  }
+});
 
 const upvoteLens = R.lens(R.propOr(0, 'upvotes'), R.assoc('upvotes'));
 const downVoteLens = R.lens(R.propOr(0, 'downvotes'), R.assoc('downvotes'));
 
-export const upVoteQuestion = (questionId, questions) => {
+const updateQuestionVote = (questionId, questions, voteLens) => {
   const lens = lensById(questionId, questions);
-  return R.over(
-    R.compose(
-      lens,
-      upvoteLens,
-    ),
-    R.add(1),
-    questions,
-  );
+  return lens
+    ? R.over(
+        R.compose(
+          lens,
+          voteLens,
+        ),
+        R.add(1),
+        questions,
+      )
+    : questions;
 };
 
-export const downVoteQuestion = (questionId, questions) => {
-  const lens = lensById(questionId, questions);
-  return R.over(
-    R.compose(
-      lens,
-      downVoteLens,
-    ),
-    R.add(1),
-    questions,
-  );
-};
+export const upVoteQuestion = (questionId, questions) =>
+  updateQuestionVote(questionId, questions, upvoteLens);
+
+export const downVoteQuestion = (questionId, questions) =>
+  updateQuestionVote(questionId, questions, downVoteLens);
 
 export const saveAnswer = (questionId, newAnswer, answers) => {
   const lensByKey = R.lens(R.propOr([], questionId), R.assoc(questionId));
