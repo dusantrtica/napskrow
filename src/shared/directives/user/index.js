@@ -5,7 +5,7 @@ const getUser = createdBy => {
     };
   }
 
-  const { Avatar = '', Id = 0, Name = 'Anonymus', Surname = 'Anonymus' } =
+  const { Avatar = '', Id = 0, Name = 'Anonymous', Surname = 'Anonymous' } =
     createdBy || {};
   return {
     Avatar,
