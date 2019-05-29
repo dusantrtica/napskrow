@@ -19,6 +19,7 @@
     <ul ng-show="home.answers[question.Id]">
       <li ng-repeat="answer in home.answers[question.Id]">
         <div ng-bind-html="home.$sce.trustAsHtml(answer.Answer)"></div>
+        Submitted by: <user created-by="answer.created_by"></user>
       </li>
     </ul>
   </div>
