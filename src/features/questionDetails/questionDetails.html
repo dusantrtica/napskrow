@@ -14,10 +14,5 @@
     on-save-new-answer="questionDetails.saveAnswer(newAnswer)"
     question-id="questionDetails.question.Id"
   ></new-answer>
-
-  <ul ng-show="questionDetails.answers">
-    <li ng-repeat="answer in questionDetails.answers">
-      <div ng-bind-html="questionDetails.$sce.trustAsHtml(answer.Answer)"></div>
-    </li>
-  </ul>
+  <answers question-answers="questionDetails.answers"></answers>
 </div>

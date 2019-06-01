@@ -1,9 +1,11 @@
-<div>
-  <textarea ng-model="newAnswerText">
+<textarea class="form-control" ng-model="newAnswerText">
           {{ newAnswerText }}
       </textarea
-  >
-  <button ng-disabled="!newAnswerText" ng-click="handleSave()">
-    Save
-  </button>
-</div>
+>
+<button
+  class="btn btn-small"
+  ng-disabled="!newAnswerText"
+  ng-click="handleSave()"
+>
+  Save
+</button>

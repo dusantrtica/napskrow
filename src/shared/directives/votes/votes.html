@@ -1,8 +1,11 @@
-<div>
+<div class="row">
   Votes {{ upvotes || 0 }}
-  <button ng-click="onUpVote()">Vote up</button>
-</div>
-<div>
+  <button class="btn btn-xs" ng-click="onUpVote()">
+    <span class="glyphicon glyphicon-thumbs-up"></span>
+  </button>
+
   Downvotes {{ downvotes || 0 }}
-  <button ng-click="onDownVote()">Downvote</button>
+  <button class="btn btn-xs" ng-click="onDownVote()">
+    <span class="glyphicon glyphicon-thumbs-down"></span>
+  </button>
 </div>

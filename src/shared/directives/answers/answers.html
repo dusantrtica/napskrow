@@ -1,0 +1,19 @@
+<div ng-show="questionAnswers && questionAnswers.length > 0">
+  Answers ({{ questionAnswers.length }})
+  <a ng-show="questionAnswers.length > 1" ng-click="toggleShow()">
+    {{ showAll ? 'Hide' : 'Show all' }}
+  </a>
+  <div
+    ng-if="!showAll"
+    ng-bind-html="$sce.trustAsHtml(questionAnswers[0].Answer)"
+  ></div>
+  <div ng-if="showAll">
+    <ul>
+      <li ng-repeat="answer in questionAnswers">
+        <div ng-bind-html="$sce.trustAsHtml(answer.Answer)"></div>
+        Submitted by:
+        <user created-by="answer.created_by"></user>
+      </li>
+    </ul>
+  </div>
+</div>
